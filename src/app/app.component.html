@@ -1,9 +1,15 @@
-<app-header></app-header>
+<app-header (navigationChanged)="onNavidationChange($event)"></app-header>
 <div class="container">
   <div class="row">
     <div class="col-mg-12">
-      <app-recipes></app-recipes>
-      <app-shopping-list></app-shopping-list>
+      <div *ngIf="isRecipeSelected; then recipe else shopping"></div>
+      <ng-template #recipe>
+        <app-recipes></app-recipes>
+      </ng-template>
+      <ng-template #shopping>
+        <app-shopping-list></app-shopping-list>
+      </ng-template>
+
     </div>
   </div>
 </div>

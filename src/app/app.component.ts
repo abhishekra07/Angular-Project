@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'bootstrap-project';
+  isRecipeSelected:boolean = true;
+
+  onNavidationChange(recipeSelected){
+    this.isRecipeSelected = recipeSelected;
+  }
 }
