@@ -1,13 +1,18 @@
-import { EventEmitter } from "@angular/core";
+import { EventEmitter, Injectable } from "@angular/core";
 import { Recipe } from './recipe.model';
 import { Ingredient } from "../shared/ingredient.model";
+import { ShoppingService } from "../shopping-list/shopping.service";
+
+@Injectable()
 export class RecipeService {
   recipeSelected = new EventEmitter<Recipe>();
+
+  constructor(private shoppingService: ShoppingService) {}
 
   private recipes: Recipe[] = [
     new Recipe(
       'Cheese Burger',
-      'Cheese Burger',
+      'Its a Cheese Burger',
       'https://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4135.png',
       [
         new Ingredient('Cheese',2),
@@ -19,7 +24,7 @@ export class RecipeService {
     ),
     new Recipe(
       'Pizza',
-      'Pizza',
+      'Its a Pizza',
       'https://www.indianhealthyrecipes.com/wp-content/uploads/2015/10/pizza-recipe-1.jpg',
     [
       new Ingredient('Cheese',2),
@@ -30,7 +35,12 @@ export class RecipeService {
     ])
   ];
 
-  getRecipe(){
+  getRecipe() {
     return this.recipes.slice();
+  }
+
+  addToShopping(ingredients: Ingredient[]) {
+    console.log('recipe service ', ingredients);
+    this.shoppingService.addIngredients(ingredients);
   }
 }
